@@ -8,7 +8,7 @@
       name="description"
       content="Web3 AI 回复工具，把社区吐槽、产品问题和活动互动转译成有温度、有推进感的中文回复。"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260606-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260606-5" />
   </head>
   <body>
     <header class="site-header">
@@ -26,76 +26,48 @@
     <main id="top">
       <section class="hero-section">
         <div class="gallery-label">
-          <span>REPLY SYSTEM</span>
-          <span>SKILL FOR AGENTS</span>
+          <span>WEB3 REPLY PLAYGROUND</span>
+          <span>JIAYIN + KAJIE</span>
         </div>
         <div class="hero-layout">
           <div class="hero-copy">
             <p class="kicker">给 Web3 社区运营的一键人格回复工具</p>
             <h1>
-              <span>家印+卡姐双重奏，</span>
-              <span>回应你想要的所有</span>
+              <span>家印+卡姐双重奏</span>
+              <span>回应你想要的一切</span>
             </h1>
             <p class="hero-text">
-              把谢家印的稳、卡姐的甜、品牌公关的边界和 Web3 社区的语感压进一个在线工具。用户吐槽、催更、开卡问题、福利活动和产品种草，都能生成可直接复制的回复。
+              把一句难接的话，变成一条还能继续聊下去的回复。先选人格，再丢问题，生成之后再决定要不要做成分享卡。
             </p>
           </div>
-          <figure class="hero-art">
-            <img src="./assets/xiejy-ai-infographic-horizontal.png" alt="谢家印AI信息图" />
-            <figcaption>
-              <span>INFOGRAPHIC</span>
-              <strong>从用户情绪到温和回复的完整流程</strong>
-            </figcaption>
-          </figure>
+          <div class="hero-side-note">
+            <span>HOW IT WORKS</span>
+            <p>选一个人来回。家印负责稳稳接住，卡姐负责亲亲热热推进。</p>
+          </div>
         </div>
       </section>
 
-      <section class="curator-note" id="exhibition">
-        <div class="section-index">为什么要做 / WHY IT EXISTS</div>
-        <p>
-          最真诚的回复，永远来自人。这个工具不是为了替谁变得真诚，而是把好的语气、清楚的结构和稳定的服务动作先整理出来。人在前面负责，AI 在后面托底，让每一次回复少一点慌乱，多一点被认真对待的感觉。
-        </p>
-      </section>
-
-      <section class="exhibit-grid" aria-label="工具原则">
-        <article class="exhibit-card">
-          <span>01 / HUMAN FIRST</span>
-          <h2>人先于 AI</h2>
-          <p>AI 可以写句子，但不能替人负责。回复先承认用户的感受，再交代下一步动作。</p>
-        </article>
-        <article class="exhibit-card">
-          <span>02 / VOICE MEMORY</span>
-          <h2>语气有记忆</h2>
-          <p>不同账号有不同温度：谢家印更稳，卡姐更亲近。工具保存的是风格，不是套话。</p>
-        </article>
-        <article class="exhibit-card">
-          <span>03 / CLOSED LOOP</span>
-          <h2>处理要闭环</h2>
-          <p>好回复不止是好听，还要能推进：记录、核实、同步、反馈，给用户一个可期待的下一步。</p>
-        </article>
-      </section>
-
-      <section class="instrument-section" id="instrument">
+      <section class="instrument-section home-instrument" id="instrument">
         <div class="persona-panel">
           <div class="persona-panel-head">
             <div>
-              <div class="section-index">选择人格 / PERSONA</div>
-              <h2>先选一种社区气质</h2>
+              <div class="section-index">人格切换 / PERSONA</div>
+              <h2>人格切换</h2>
             </div>
-            <p>两套 Skill 独立运行。一个负责稳稳接住情绪，一个负责亲近推进问题。</p>
+            <p>一个适合把事扛起来，一个适合把人哄回来。真正处理问题的还是你，AI 只是先把语气放软。</p>
           </div>
           <div class="persona-grid" aria-label="人格模块">
             <button class="persona-card is-active" type="button" data-persona="xiejiayin" aria-pressed="true">
               <span>01 / STEADY</span>
-              <strong>谢家印模式</strong>
-              <em>负责人式承接</em>
-              <p>短、暖、稳。适合吐槽承接、客服推进、危机公关和“来了就是VIP”的回复。</p>
+              <strong>稳稳接住</strong>
+              <em>谢家印模式</em>
+              <p>适合投诉、催更、危机、公关。少解释，先负责。</p>
             </button>
             <button class="persona-card" type="button" data-persona="kajiq" aria-pressed="false">
               <span>02 / SWEET</span>
-              <strong>卡姐 kajiQ 模式</strong>
-              <em>闺蜜式推进</em>
-              <p>亲近、可爱、福利感。适合钱包、PayFi、U卡、开卡问题和社区种草长帖。</p>
+              <strong>亲亲热热推进</strong>
+              <em>卡姐 kajiQ 模式</em>
+              <p>适合钱包、U 卡、福利、种草。先哄好，再推进。</p>
             </button>
           </div>
         </div>
@@ -150,19 +122,64 @@
           <section class="result-panel" aria-live="polite">
             <div class="result-heading">
               <span>OUTPUT</span>
-              <h2>可直接复制的回复</h2>
+              <h2>点击回复卡片，复制或分享</h2>
             </div>
             <div class="result-list" id="resultList"></div>
           </section>
         </div>
       </section>
 
-      <section class="sample-wall">
-        <div class="section-index">回复公式 / FORMULA</div>
-        <blockquote>
-          <p>“收到，先抱歉让你体验不好。” / “诶诶，宝子先别急。”</p>
-          <cite>两套公式：稳住情绪 → 推进问题；亲近承接 → 具体动作</cite>
-        </blockquote>
+      <section class="curator-note" id="exhibition">
+        <div class="section-index">写给运营的人 / NOTE</div>
+        <p>
+          真正有温度的，还是乐于回应的人。这个工具只是帮你在最忙、最累、最容易语气变重的时候，先把句子放软，把动作说清，把用户留在对话里。
+        </p>
+      </section>
+
+      <section class="exhibit-grid" aria-label="工具原则">
+        <article class="exhibit-card">
+          <span>01 / HOLD FIRE</span>
+          <h2>稳住情绪</h2>
+          <p>用户情绪上来时，先把火接住，不急着证明自己对。</p>
+        </article>
+        <article class="exhibit-card">
+          <span>02 / SOFT WORDS</span>
+          <h2>亲切关怀</h2>
+          <p>同一句“我去处理”，可以变成“我帮你记录推进，先不让你白等”。</p>
+        </article>
+        <article class="exhibit-card">
+          <span>03 / SHAREABLE</span>
+          <h2>命中问题</h2>
+          <p>好回复不只解决问题，还能变成一张卡，让别人看见这个社区的温度。</p>
+        </article>
+      </section>
+
+      <section class="phrase-section" aria-label="语气素材库">
+        <div class="section-index">语气素材库 / VOICE LIBRARY</div>
+        <div class="phrase-layout">
+          <div>
+            <h2>金句库</h2>
+            <p>把社区里真正有记忆点的表达沉淀下来。需要稳的时候稳，需要哄的时候哄，需要推进的时候把动作说清楚。</p>
+          </div>
+          <div class="phrase-cloud">
+            <button type="button" data-fill-phrase="来了就是VIP">来了就是VIP</button>
+            <button type="button" data-fill-phrase="宝子先别急">宝子先别急</button>
+            <button type="button" data-fill-phrase="我帮你记录推进">我帮你记录推进</button>
+            <button type="button" data-fill-phrase="真实体验最重要">真实体验最重要</button>
+            <button type="button" data-fill-phrase="先不让你白等">先不让你白等</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="flow-section" aria-label="生成过程图">
+        <div class="section-index">生成过程 / FLOW</div>
+        <div class="flow-strip">
+          <div><span>01</span><strong>用户情绪</strong><p>吐槽、催更、阴阳、求助</p></div>
+          <div><span>02</span><strong>人格选择</strong><p>家印稳住，卡姐哄好</p></div>
+          <div><span>03</span><strong>话术库</strong><p>品牌公关 + Web3 社交语感</p></div>
+          <div><span>04</span><strong>回复卡片</strong><p>可复制，也可生成图片</p></div>
+          <div><span>05</span><strong>分享到 X</strong><p>让好回复自己传播</p></div>
+        </div>
       </section>
 
       <section class="install-section" id="install">
@@ -181,7 +198,56 @@ npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/kajiq-ai-replier --yes
       <p>免费试用中。回复由 AI 生成，仅作社区运营文案参考。真正有温度的，始终是愿意认真回应的人。</p>
     </footer>
 
+    <div class="reply-action-modal" id="replyActionModal" hidden>
+      <div class="reply-action-backdrop" data-close-action></div>
+      <section class="reply-action-panel" role="dialog" aria-modal="true" aria-labelledby="replyActionTitle">
+        <div>
+          <span class="section-index">这条回复 / REPLY</span>
+          <h2 id="replyActionTitle">要怎么用它？</h2>
+          <p id="replyActionText"></p>
+        </div>
+        <div class="share-action-row">
+          <button class="primary-button" type="button" id="actionCopyReply">复制回复</button>
+          <button class="secondary-button" type="button" id="actionOpenShare">生成分享卡</button>
+          <button class="secondary-button" type="button" data-close-action>先看看</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="share-modal" id="shareModal" hidden>
+      <div class="share-modal-backdrop" data-close-share></div>
+      <section class="share-modal-panel" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+        <div class="share-modal-head">
+          <div>
+            <span class="section-index">分享卡 / SHARE CARD</span>
+            <h2 id="shareModalTitle">把这条回复变成一张图</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-share aria-label="关闭分享卡">×</button>
+        </div>
+        <div class="share-export-wrap">
+          <div class="share-card export-card" id="exportShareCard">
+            <div class="share-card-topline">
+              <span id="exportPersona">谢家印模式</span>
+              <span>warmreply.xyz</span>
+            </div>
+            <div class="share-card-tag" id="exportTag">用户吐槽 / 人格原味</div>
+            <p class="share-card-question" id="exportQuestion">为什么钱包这么难用？客服也没人回。</p>
+            <p class="share-card-reply" id="exportReply">收到，先抱歉让你体验不好。我帮你记录推进🩵</p>
+            <div class="share-card-footer">
+              <span>真正有温度的还是人</span>
+              <span>WEB3 AI 回复工具</span>
+            </div>
+          </div>
+        </div>
+        <div class="share-action-row">
+          <button class="primary-button" type="button" id="downloadShareCard">下载 PNG</button>
+          <button class="secondary-button" type="button" id="copyShareCard">复制图片</button>
+          <a class="secondary-button" id="tweetShareCard" target="_blank" rel="noreferrer">发到 X</a>
+        </div>
+      </section>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="./script.js?v=20260606-2"></script>
+    <script src="./script.js?v=20260606-5"></script>
   </body>
 </html>

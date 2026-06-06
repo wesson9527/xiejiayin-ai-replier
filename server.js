@@ -114,6 +114,21 @@ const toneAddons = {
   redbook: "真实体验最重要。"
 };
 
+const phraseLibrary = {
+  xiejiayin: {
+    openings: ["收到", "我看到了", "来了来了", "没关系", "先别急"],
+    empathy: ["先抱歉让你体验不好", "这条反馈我认真记下", "不让你白等", "真实体验最重要", "用户利益第一"],
+    actions: ["我帮你记录推进", "我先同步团队核实", "进展我来跟", "操心的事我们来做", "能确认的我直接说"],
+    endings: ["很快给你答复", "很快见惊喜", "来了就是VIP", "你先别担心", "谢谢你愿意直接说"]
+  },
+  kajiq: {
+    openings: ["诶诶，宝子先别急", "收到，卡姐看到了", "嘿嘿，先别慌", "宝子别怕", "心动可以先等等"],
+    empathy: ["这条体验不该让你来回折腾", "卡姐帮你记下", "不让你白反馈", "先把事实捋清楚", "家人们的体验最重要"],
+    actions: ["我去帮你确认", "我帮你盯进度", "找对应团队看一下", "有进展我来喊你", "你把关键信息发我"],
+    endings: ["别漏拍", "很快给家人们惊喜", "先小额体验，别上头", "不顺手就回来找卡姐", "欢迎继续来骂醒我"]
+  }
+};
+
 function sendJson(response, statusCode, data) {
   response.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
@@ -128,25 +143,39 @@ function cleanReply(text) {
 
 function fallbackReplies({ message = "", scene = "complaint", tone = "xie", emoji = true, short = true, persona = "xiejiayin" }) {
   const isKajiq = persona === "kajiq";
-  const selectedTemplates = isKajiq ? kajiqTemplates : templates;
-  const selected = selectedTemplates[scene] || selectedTemplates.complaint;
+  const lib = phraseLibrary[persona] || phraseLibrary.xiejiayin;
   const mark = emoji ? (isKajiq ? "🥰" : "🩵") : "";
-  return selected.map((line, index) => {
-    let reply = line.replace("{emoji}", mark);
+  const addon = toneAddons[tone] || "";
+  const includesWallet = message.includes("钱包") || message.toLowerCase().includes("wallet");
+  const includesCard = message.includes("卡") || message.toLowerCase().includes("card");
+  const sceneActions = {
+    complaint: includesWallet ? (isKajiq ? "钱包问题卡姐帮你记下，你把截图和钱包 ID 发我" : "钱包最难用的点丢给我，我帮你记录推进") : lib.actions[0],
+    support: includesCard && isKajiq ? "你把页面截图和钱包 ID 发我，卡姐帮你排查" : lib.actions[1],
+    feature: isKajiq ? "这个需求卡姐先收下，后面有动静我来喊" : "这个需求我先记下，进展我来跟",
+    crisis: isKajiq ? "我先核实清楚，能确认的直接说" : "我先同步团队核实，能确认的我直接说",
+    promo: isKajiq ? "先小额体验，好用再安利" : "你先体验，感受最重要",
+    tweet: isKajiq ? "宝子先别急，问题卡姐来接" : "来了就是VIP，接住社区所有情绪"
+  };
 
-    if (!isKajiq && tone !== "xie" && index === 0) reply = `${toneAddons[tone] || ""}${reply}`;
-    if (!isKajiq && tone === "web3" && scene !== "crisis" && index === 1) reply = `alpha 收到，我帮你盯。DYOR，别上头${mark}`;
-    if (!isKajiq && tone === "redbook" && scene !== "crisis" && index === 1) reply = `被种草可以，先小额体验。好用再安利，不好用我继续改${mark}`;
-    if (isKajiq && tone === "web3" && scene !== "crisis" && index === 1) reply = `心动可以，别上头。先小额体验，风险自己拿稳${mark}`;
-    if (isKajiq && tone === "redbook" && scene !== "crisis" && index === 1) reply = `嘿嘿，先体验再安利，不顺手就回来骂卡姐，我继续改${mark}`;
-    if (short && reply.length > 68) reply = reply.replace("你把最难用的点丢给我，", "").replace("真实反馈我都认真看，", "");
-    if (!isKajiq && message.includes("钱包") && scene === "complaint" && index === 0) {
-      reply = `收到，先抱歉让你体验不好。钱包最难用的点丢给我，我帮你记录推进${mark}`;
-    }
-    if (isKajiq && message.includes("钱包") && scene === "complaint" && index === 0) {
-      reply = `诶诶，宝子先别急。钱包问题卡姐帮你记下，你把截图和钱包 ID 发我${mark}`;
-    }
+  const replies = [
+    `${lib.openings[0]}，${lib.empathy[0]}。${sceneActions[scene] || lib.actions[0]}${mark}`,
+    `${tone !== "xie" && addon ? addon : ""}${lib.empathy[1]}，${lib.actions[2]}，${lib.endings[0]}${mark}`,
+    isKajiq
+      ? `${lib.openings[2]}，${lib.empathy[2]}。${lib.actions[3]}，${lib.endings[3]}${mark}`
+      : `${lib.openings[3]}，${lib.empathy[3]}。${lib.actions[3]}，${lib.endings[2]}${mark}`
+  ];
 
+  return replies.map((line) => {
+    let reply = line;
+    if (tone === "web3" && scene !== "crisis") {
+      reply = isKajiq ? reply.replace("先小额体验，好用再安利", "心动可以，别上头，先小额体验") : reply.replace("你先体验，感受最重要", "alpha 收到，我帮你盯，别上头");
+    }
+    if (tone === "redbook" && scene !== "crisis") {
+      reply = isKajiq ? reply.replace("很快给家人们惊喜", "真实体验完再安利") : reply.replace("很快见惊喜", "好用再安利，不好用我继续改");
+    }
+    if (short && reply.length > 72) {
+      reply = reply.replace("你把最难用的点丢给我，", "").replace("真实反馈我都认真看，", "");
+    }
     return cleanReply(reply);
   });
 }
@@ -200,7 +229,8 @@ function buildPromptParts(payload, skill, references, personaConfig) {
     "你现在为官网在线生成器服务。只输出 JSON，不要输出 Markdown。",
     "JSON 格式必须是：{\"replies\":[\"回复1\",\"回复2\",\"回复3\"]}。",
     `当前人格：${personaConfig.label}。`,
-    "回复必须中文为主、短、暖、稳，不反击、不抱怨、不承诺未确认的赔偿、审核、空投或收益结果。"
+    "回复必须中文为主、短、暖、稳，不反击、不抱怨、不承诺未确认的赔偿、审核、空投或收益结果。",
+    "3 条回复必须明显不同：第一条偏直接处理，第二条偏安抚解释，第三条偏温暖收尾或后续期待。不要三条换皮重复。"
   ].join("\n\n");
 
   const input = {
