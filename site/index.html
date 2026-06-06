@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>谢家印AI | 社区回复生成器</title>
+    <title>Web3 AI 回复工具</title>
     <meta
       name="description"
-      content="谢家印AI社区回复生成器，把用户吐槽转译成有温度、有推进感的中文回复。"
+      content="Web3 AI 回复工具，把社区吐槽、产品问题和活动互动转译成有温度、有推进感的中文回复。"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="暖男客服AI首页">
-        <span class="brand-symbol">暖</span>
-        <span>暖男客服AI</span>
+      <a class="brand" href="#top" aria-label="Web3 AI 回复工具首页">
+        <span class="brand-symbol">W3</span>
+        <span>Web3 AI 回复工具</span>
       </a>
       <nav aria-label="主导航">
         <a href="#exhibition">能力</a>
@@ -31,13 +31,13 @@
         </div>
         <div class="hero-layout">
           <div class="hero-copy">
-            <p class="kicker">给社区运营的一键温柔回复工具</p>
+            <p class="kicker">给 Web3 社区运营的一键人格回复工具</p>
             <h1>
-              <span>来了就是VIP，</span>
-              <span>接住你的所有情绪</span>
+              <span>两种人格，</span>
+              <span>接住社区所有情绪</span>
             </h1>
             <p class="hero-text">
-              把谢家印的温暖、品牌公关的稳、客服的耐心，压进一个可安装的 Agent Skill。用户吐槽、催更、质疑、追问，都能生成短、暖、稳、有推进感的回复。
+              把谢家印的稳、卡姐的甜、品牌公关的边界和 Web3 社区的语感压进一个在线工具。用户吐槽、催更、开卡问题、福利活动和产品种草，都能生成可直接复制的回复。
             </p>
           </div>
           <figure class="hero-art">
@@ -53,7 +53,7 @@
       <section class="curator-note" id="exhibition">
         <div class="section-index">为什么需要 / WHY IT EXISTS</div>
         <p>
-          社区运营每天都在接情绪。真人会累，会急，会想解释；谢家印AI只做一件事：先接住用户，再给出推进动作，最后把对话留在一个更柔软的位置。
+          社区运营每天都在接情绪。不同账号需要不同人格：有人适合稳稳接住，有人适合亲亲热热地推进。这个工具把两套风格并列放在一起，让回复更像真实社区，而不是模板客服。
         </p>
       </section>
 
@@ -66,7 +66,7 @@
         <article class="exhibit-card">
           <span>02 / LANGUAGE</span>
           <h2>语气不丢</h2>
-          <p>保留“来了就是VIP”“很快见惊喜”“操心的事我们来做”等记忆点。</p>
+          <p>保留“来了就是VIP”“很快见惊喜”，也支持“宝子”“嘿嘿”“心动行动”等卡姐语气。</p>
         </article>
         <article class="exhibit-card">
           <span>03 / SERVICE</span>
@@ -77,8 +77,21 @@
 
       <section class="instrument-section" id="instrument">
         <div class="section-index">在线试用 / TRY IT</div>
+        <div class="persona-grid" aria-label="人格模块">
+          <button class="persona-card is-active" type="button" data-persona="xiejiayin">
+            <span>01 / STEADY</span>
+            <strong>谢家印模式</strong>
+            <p>短、暖、稳。适合吐槽承接、客服推进、危机公关和“来了就是VIP”的负责人式回复。</p>
+          </button>
+          <button class="persona-card" type="button" data-persona="kajiq">
+            <span>02 / SWEET</span>
+            <strong>卡姐 kajiQ 模式</strong>
+            <p>亲近、可爱、福利感。适合 Bitget Wallet、PayFi、U卡、开卡问题和闺蜜式种草长帖。</p>
+          </button>
+        </div>
         <div class="instrument-grid">
           <form class="composer-panel" id="replyForm">
+            <input id="personaInput" type="hidden" value="xiejiayin" />
             <label for="userMessage">用户原话</label>
             <textarea
               id="userMessage"
@@ -101,7 +114,7 @@
               <div>
                 <label for="toneSelect">语气</label>
                 <select id="toneSelect">
-                  <option value="xie">谢家印原味</option>
+                  <option value="xie">人格原味</option>
                   <option value="service">暖男客服</option>
                   <option value="pr">品牌公关</option>
                   <option value="web3">Web3 社交</option>
@@ -137,15 +150,16 @@
       <section class="sample-wall">
         <div class="section-index">回复公式 / FORMULA</div>
         <blockquote>
-          <p>“收到，先抱歉让你体验不好。我帮你记录推进一下，操心的事我们来做🩵”</p>
-          <cite>标准回复公式：收到 / 抱歉 → 记录推进 → 别担心 → 温暖收尾</cite>
+          <p>“收到，先抱歉让你体验不好。” / “诶诶，宝子先别急。”</p>
+          <cite>两套公式：稳住情绪 → 推进问题；亲近承接 → 具体动作</cite>
         </blockquote>
       </section>
 
       <section class="install-section" id="install">
         <div class="section-index">安装 / INSTALL</div>
-        <h2>把这个 Skill 放进你的 Agent</h2>
-        <pre><code>npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier --yes --global</code></pre>
+        <h2>把两个 Skill 放进你的 Agent</h2>
+        <pre><code>npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier --yes --global
+npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/kajiq-ai-replier --yes --global</code></pre>
       </section>
     </main>
 
