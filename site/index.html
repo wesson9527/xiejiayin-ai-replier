@@ -8,7 +8,7 @@
       name="description"
       content="Web3 AI 回复工具，把社区吐槽、产品问题和活动互动转译成有温度、有推进感的中文回复。"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260606-2" />
   </head>
   <body>
     <header class="site-header">
@@ -33,8 +33,8 @@
           <div class="hero-copy">
             <p class="kicker">给 Web3 社区运营的一键人格回复工具</p>
             <h1>
-              <span>两种人格，</span>
-              <span>接住社区所有情绪</span>
+              <span>家印+卡姐双重奏，</span>
+              <span>回应你想要的所有</span>
             </h1>
             <p class="hero-text">
               把谢家印的稳、卡姐的甜、品牌公关的边界和 Web3 社区的语感压进一个在线工具。用户吐槽、催更、开卡问题、福利活动和产品种草，都能生成可直接复制的回复。
@@ -51,43 +51,53 @@
       </section>
 
       <section class="curator-note" id="exhibition">
-        <div class="section-index">为什么需要 / WHY IT EXISTS</div>
+        <div class="section-index">为什么要做 / WHY IT EXISTS</div>
         <p>
-          社区运营每天都在接情绪。不同账号需要不同人格：有人适合稳稳接住，有人适合亲亲热热地推进。这个工具把两套风格并列放在一起，让回复更像真实社区，而不是模板客服。
+          最真诚的回复，永远来自人。这个工具不是为了替谁变得真诚，而是把好的语气、清楚的结构和稳定的服务动作先整理出来。人在前面负责，AI 在后面托底，让每一次回复少一点慌乱，多一点被认真对待的感觉。
         </p>
       </section>
 
-      <section class="exhibit-grid" aria-label="技能亮点">
+      <section class="exhibit-grid" aria-label="工具原则">
         <article class="exhibit-card">
-          <span>01 / TEMPERATURE</span>
-          <h2>同一温度</h2>
-          <p>连续被骂也不反击，不甩锅，不阴阳怪气。用户越激动，回复越短、越稳、越柔。</p>
+          <span>01 / HUMAN FIRST</span>
+          <h2>人先于 AI</h2>
+          <p>AI 可以写句子，但不能替人负责。回复先承认用户的感受，再交代下一步动作。</p>
         </article>
         <article class="exhibit-card">
-          <span>02 / LANGUAGE</span>
-          <h2>语气不丢</h2>
-          <p>保留“来了就是VIP”“很快见惊喜”，也支持“宝子”“嘿嘿”“心动行动”等卡姐语气。</p>
+          <span>02 / VOICE MEMORY</span>
+          <h2>语气有记忆</h2>
+          <p>不同账号有不同温度：谢家印更稳，卡姐更亲近。工具保存的是风格，不是套话。</p>
         </article>
         <article class="exhibit-card">
-          <span>03 / SERVICE</span>
-          <h2>先接情绪</h2>
-          <p>融入顶级客服、品牌公关、日本式服务、Web3 社交、小红书种草表达。</p>
+          <span>03 / CLOSED LOOP</span>
+          <h2>处理要闭环</h2>
+          <p>好回复不止是好听，还要能推进：记录、核实、同步、反馈，给用户一个可期待的下一步。</p>
         </article>
       </section>
 
       <section class="instrument-section" id="instrument">
-        <div class="section-index">在线试用 / TRY IT</div>
-        <div class="persona-grid" aria-label="人格模块">
-          <button class="persona-card is-active" type="button" data-persona="xiejiayin">
-            <span>01 / STEADY</span>
-            <strong>谢家印模式</strong>
-            <p>短、暖、稳。适合吐槽承接、客服推进、危机公关和“来了就是VIP”的负责人式回复。</p>
-          </button>
-          <button class="persona-card" type="button" data-persona="kajiq">
-            <span>02 / SWEET</span>
-            <strong>卡姐 kajiQ 模式</strong>
-            <p>亲近、可爱、福利感。适合 Bitget Wallet、PayFi、U卡、开卡问题和闺蜜式种草长帖。</p>
-          </button>
+        <div class="persona-panel">
+          <div class="persona-panel-head">
+            <div>
+              <div class="section-index">选择人格 / PERSONA</div>
+              <h2>先选一种社区气质</h2>
+            </div>
+            <p>两套 Skill 独立运行。一个负责稳稳接住情绪，一个负责亲近推进问题。</p>
+          </div>
+          <div class="persona-grid" aria-label="人格模块">
+            <button class="persona-card is-active" type="button" data-persona="xiejiayin" aria-pressed="true">
+              <span>01 / STEADY</span>
+              <strong>谢家印模式</strong>
+              <em>负责人式承接</em>
+              <p>短、暖、稳。适合吐槽承接、客服推进、危机公关和“来了就是VIP”的回复。</p>
+            </button>
+            <button class="persona-card" type="button" data-persona="kajiq" aria-pressed="false">
+              <span>02 / SWEET</span>
+              <strong>卡姐 kajiQ 模式</strong>
+              <em>闺蜜式推进</em>
+              <p>亲近、可爱、福利感。适合钱包、PayFi、U卡、开卡问题和社区种草长帖。</p>
+            </button>
+          </div>
         </div>
         <div class="instrument-grid">
           <form class="composer-panel" id="replyForm">
@@ -172,6 +182,6 @@ npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/kajiq-ai-replier --yes
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=20260606-2"></script>
   </body>
 </html>

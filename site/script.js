@@ -232,7 +232,11 @@ form.addEventListener("submit", (event) => {
 personaCards.forEach((card) => {
   card.addEventListener("click", () => {
     personaInput.value = card.dataset.persona;
-    personaCards.forEach((item) => item.classList.toggle("is-active", item === card));
+    personaCards.forEach((item) => {
+      const isActive = item === card;
+      item.classList.toggle("is-active", isActive);
+      item.setAttribute("aria-pressed", String(isActive));
+    });
     if (card.dataset.persona === "kajiq" && !userMessage.value.trim()) {
       userMessage.placeholder = "例如：Fiat24 开卡一直卡住，是不是又没戏了？";
     } else {
