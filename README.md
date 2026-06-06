@@ -433,6 +433,8 @@ export OPENAI_MODEL="gpt-4.1-mini"
 npm start
 ```
 
+服务器部署、域名解析、HTTPS、DeepSeek Key 配置见 [DEPLOY.md](DEPLOY.md)。
+
 ## 校验结果
 
 技能已通过官方校验脚本：
