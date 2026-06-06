@@ -250,7 +250,7 @@ async function handleApiReply(request, response) {
 
     try {
       replies = await aiReplies(normalized);
-      if (replies) source = "openai";
+      if (replies) source = provider;
     } catch (error) {
       console.error(error.message);
     }
