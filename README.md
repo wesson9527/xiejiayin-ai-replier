@@ -326,17 +326,13 @@ gm，alpha 收到🫡 我先帮你盯产品进展，DYOR，别上头🩵
 
 ## 一键安装
 
-Hermes / gaent 用户可以直接安装：
+所有支持 Agent Skills 的客户端，统一使用这一条命令：
 
 ```bash
-hermes skills install qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
+npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier --yes --global
 ```
 
-也可以使用完整 skills.sh 标识：
-
-```bash
-hermes skills install skills-sh/qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
-```
+这条命令会从 GitHub 安装 `xiejiayin-ai-replier`，并自动同步到常见 agent 的全局技能目录。
 
 安装后，在对话里这样调用：
 
@@ -346,7 +342,7 @@ hermes skills install skills-sh/qiuqiubuchongle-cloud/xiejiayin-ai-replier/xieji
 
 ## 手动安装
 
-如果你的环境不支持 `hermes skills install`，可以手动复制技能：
+如果你的环境不支持 `npx skills add`，可以手动复制技能：
 
 ```bash
 cp -R xiejiayin-ai-replier ~/.codex/skills/
