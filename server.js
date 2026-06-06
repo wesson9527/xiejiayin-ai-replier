@@ -9,7 +9,11 @@ const skillPath = path.join(__dirname, "xiejiayin-ai-replier", "SKILL.md");
 const referencesPath = path.join(__dirname, "xiejiayin-ai-replier", "references", "style-samples.md");
 
 const port = Number(process.env.PORT || 8080);
-const model = process.env.OPENAI_MODEL || "gpt-4.1-mini";
+const provider = (process.env.AI_PROVIDER || (process.env.DEEPSEEK_API_KEY ? "deepseek" : "openai")).toLowerCase();
+const model =
+  provider === "deepseek"
+    ? process.env.DEEPSEEK_MODEL || "deepseek-v4-flash"
+    : process.env.OPENAI_MODEL || "gpt-4.1-mini";
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -132,13 +136,11 @@ function parseReplies(text) {
 }
 
 async function aiReplies(payload) {
-  if (!process.env.OPENAI_API_KEY) return null;
+  if (provider === "deepseek") return deepseekReplies(payload);
+  return openaiReplies(payload);
+}
 
-  const [skill, references] = await Promise.all([
-    readFile(skillPath, "utf8"),
-    readFile(referencesPath, "utf8").catch(() => "")
-  ]);
-
+function buildPromptParts(payload, skill, references) {
   const instructions = [
     skill,
     references.slice(0, 5000),
@@ -155,6 +157,20 @@ async function aiReplies(payload) {
     shortFirst: payload.short
   };
 
+  const userPrompt = `请根据以下用户原话和配置，生成 3 条谢家印AI风格回复：\n${JSON.stringify(input, null, 2)}`;
+  return { instructions, userPrompt };
+}
+
+async function openaiReplies(payload) {
+  if (!process.env.OPENAI_API_KEY) return null;
+
+  const [skill, references] = await Promise.all([
+    readFile(skillPath, "utf8"),
+    readFile(referencesPath, "utf8").catch(() => "")
+  ]);
+
+  const { instructions, userPrompt } = buildPromptParts(payload, skill, references);
+
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
@@ -164,7 +180,7 @@ async function aiReplies(payload) {
     body: JSON.stringify({
       model,
       instructions,
-      input: `请根据以下用户原话和配置，生成 3 条谢家印AI风格回复：\n${JSON.stringify(input, null, 2)}`,
+      input: userPrompt,
       max_output_tokens: 500
     })
   });
@@ -176,6 +192,44 @@ async function aiReplies(payload) {
 
   const data = await response.json();
   const text = extractOutputText(data);
+  const replies = parseReplies(text);
+  return replies.length ? replies : null;
+}
+
+async function deepseekReplies(payload) {
+  if (!process.env.DEEPSEEK_API_KEY) return null;
+
+  const [skill, references] = await Promise.all([
+    readFile(skillPath, "utf8"),
+    readFile(referencesPath, "utf8").catch(() => "")
+  ]);
+
+  const { instructions, userPrompt } = buildPromptParts(payload, skill, references);
+  const response = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        { role: "system", content: instructions },
+        { role: "user", content: userPrompt }
+      ],
+      response_format: { type: "json_object" },
+      max_tokens: 500,
+      temperature: 0.7
+    })
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`deepseek_${response.status}: ${errorText.slice(0, 300)}`);
+  }
+
+  const data = await response.json();
+  const text = data.choices?.[0]?.message?.content?.trim() || "";
   const replies = parseReplies(text);
   return replies.length ? replies : null;
 }

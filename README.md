@@ -398,8 +398,9 @@ site/index.html
 - `GET /`：托管官网。
 - `POST /api/reply`：根据 Skill 规则生成 3 条回复。
 - `GET /healthz`：健康检查。
+- 如果配置了 `DEEPSEEK_API_KEY`，后端会优先走 DeepSeek Chat Completions API。
 - 如果配置了 `OPENAI_API_KEY`，后端会读取 `xiejiayin-ai-replier/SKILL.md` 和参考样本，让模型按 Skill 生成。
-- 如果没有配置 `OPENAI_API_KEY`，后端自动使用内置模板兜底，网站仍然可用。
+- 如果没有配置任何模型 Key，后端自动使用内置模板兜底，网站仍然可用。
 
 本地预览：
 
@@ -416,9 +417,19 @@ http://localhost:8080
 可选环境变量：
 
 ```bash
+export AI_PROVIDER="deepseek"
+export DEEPSEEK_API_KEY="你的 DeepSeek API Key"
+export DEEPSEEK_MODEL="deepseek-v4-flash"
+export PORT="8080"
+npm start
+```
+
+如果想改用 OpenAI：
+
+```bash
+export AI_PROVIDER="openai"
 export OPENAI_API_KEY="你的 OpenAI API Key"
 export OPENAI_MODEL="gpt-4.1-mini"
-export PORT="8080"
 npm start
 ```
 
