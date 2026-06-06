@@ -1,4 +1,4 @@
 interface:
   display_name: "谢家印AI回复"
   short_description: "温和承接吐槽并推进回复"
-  default_prompt: "Use $xiejiayin-ai-replier to reply to this user complaint in 谢家印AI style."
+  default_prompt: "用 $xiejiayin-ai-replier 回复这句用户吐槽：你们客服到底有没有人啊，等半天没人回。"

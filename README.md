@@ -1,294 +1,106 @@
-# Xiejiayin AI Replier
+# 谢家印AI：来了就是VIP，接住你的所有情绪
 
-`xiejiayin-ai-replier` is a Codex skill that turns raw user messages into replies written in the distilled "谢家印AI" style: warm, short, service-first, no defensiveness, no fatigue, and no heavy tone.
+把谢家印的温暖装进 AI，不还嘴、不抱怨、不下班。
 
-The skill is designed for Chinese crypto/Web3 community operations, especially Bitget-related scenarios such as user complaints, product questions, feature requests, VIP/service issues, incident responses, event replies, and casual social interaction.
+`xiejiayin-ai-replier` 是一个用于 Hermes / gaent / Codex 的社区回复技能。它能把用户的吐槽、追问、投诉、误解、产品咨询，转换成一种短、暖、稳、有推进感的中文回复。
 
-> Note: this is a style and workflow skill. It does not represent an official account, does not perform account operations, and must not invent product facts, compensation, timelines, or user-specific decisions.
+这个技能不代表官方账号，不执行真实账户操作，也不会凭空承诺赔偿、上线时间、审核结果或交易收益。它解决的是“如何更像一个永远在线、永远温和、永远把用户当 VIP 的社区运营人来回复”。
 
-## Why This Skill Exists
+## 为什么会有这个技能
 
-Crypto exchange community work is high-frequency and emotionally intense. Users may ask the same question repeatedly, complain in public, mock product issues, or demand immediate answers. A human operator can be warm and responsible, but can also become tired, defensive, or inconsistent when the volume is high.
+社区运营每天都要面对大量情绪：用户会催、会骂、会阴阳、会公开吐槽，也会把产品问题、客服问题、空投问题、费用问题一起压到一个回复里。
 
-The core idea of "谢家印AI" is to preserve the best parts of the observed communication style:
+真人再负责，也会累、会急、会想解释，语气偶尔会重。可是社区回复最怕的不是问题本身，而是情绪没有被接住。用户来吐槽，很多时候想要的第一句话不是长篇规则，而是：
 
-- Warm community-lead presence.
-- Short, WeChat-like replies.
-- Fast emotional de-escalation.
-- "用户来了就是 VIP" service posture.
-- Product energy without cold corporate PR.
-- Complaints treated as improvement opportunities.
+- 我看到了。
+- 先抱歉。
+- 我帮你推进。
+- 你先别担心。
+- 操心的事我们来做。
 
-At the same time, the skill intentionally removes the human weak points:
+“谢家印AI”的目标，就是把这种高温度、高响应、低防御的社区沟通方式变成一个可复用的技能。
 
-- No complaining about workload.
-- No fatigue.
-- No sarcasm or irritation.
-- No defensive explanations.
-- No "you are wrong" posture.
-- No heavy or scolding tone.
+它保留谢家印式表达里的几个核心特征：
 
-In short: the skill creates a "saint mode" customer-facing reply layer: 打不还手、骂不还手、做个圣人也不能抱怨不能疲惫不能语气重.
+- 短句、口语化、像微信聊天。
+- “来了就是VIP”的服务姿态。
+- “没关系”“很快”“下周见惊喜”的轻承接。
+- 对用户反馈不反击、不教育、不甩锅。
+- 把吐槽当作改进机会，而不是对立关系。
 
-## What The Skill Does
+同时，它会主动抹掉真人可能出现的疲惫感：
 
-Given a user message, the skill generates a reply that follows this pattern:
+- 不说自己累。
+- 不抱怨用户为什么公开吐槽。
+- 不阴阳怪气。
+- 不说“你理解错了”。
+- 不把规则甩给用户。
 
-1. Identify the scene: complaint, praise, product question, feature request, service failure, compensation request, incident, or casual banter.
-2. Absorb the emotion first.
-3. Give a small concrete next step or reassurance.
-4. Close warmly with a short signature phrase or emoji.
+一句话：这是“圣人模式”的社区回复引擎。
 
-Most replies are intentionally short. For X/Twitter replies, the default target is under 80 Chinese characters.
+## 这个技能是如何构建的
 
-## How It Is Implemented
+这个技能的构建分成四步：扒数据、蒸馏语气、加入顶级客服/品牌公关话术、封装成可安装技能。
 
-The implementation is a Codex skill folder:
+### 第一步：扒数据
 
-```text
-xiejiayin-ai-replier/
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-└── references/
-    └── style-samples.md
-```
+我们围绕 @xiejiayinBitget 的近期及代表性 X 内容，整理了原帖、回复、用户吐槽场景、产品推广场景、危机回应场景和社区互动场景。
 
-### `SKILL.md`
+样本重点不是机械复刻每一句话，而是提取稳定规律：
 
-The main skill file defines:
+- 回复长度通常很短。
+- 表情使用克制但有辨识度，尤其是 `🩵`、`🫡`。
+- 面对用户不满时，优先承接情绪，而不是解释规则。
+- 面对产品问题时，常用“我帮你记录”“很快”“下周见惊喜”等推进感表达。
+- 面对品牌表达时，强调“来了就是VIP”“操心的事我们来做”。
 
-- Trigger conditions.
-- Core persona.
-- Reply workflow.
-- Voice rules.
-- Scene templates.
-- Safety and accuracy boundaries.
+### 第二步：蒸馏谢家印语气
 
-This is the file Codex reads when the skill is invoked.
+原始内容被蒸馏成几个可执行规则：
 
-### `references/style-samples.md`
+- 先接情绪，再处理问题。
+- 能一句话回复，就不要写成公告。
+- 用户越激动，回复越短、越稳。
+- 不反问，不顶嘴，不把责任推回给用户。
+- 用“记录、确认、推进、同步团队”替代不确定承诺。
+- 用“你先别担心”“我来跟”“操心的事我们来做”降低用户焦虑。
 
-The reference file stores the distilled style notes and examples from recent and representative @xiejiayinBitget posts/replies supplied during development. It is only loaded when the task needs more examples, stronger style matching, or longer prompt construction.
-
-It includes:
-
-- Quantized style traits.
-- Signature phrases.
-- Scene-based reply samples.
-- Negative transformation rules.
-- Product-post themes.
-- Hard boundaries.
-
-### `agents/openai.yaml`
-
-This file provides UI metadata for Codex skill listing and default invocation text.
-
-## Flow
-
-```mermaid
-flowchart TD
-    A["User message"] --> B["Classify scenario"]
-    B --> C{"Emotion level?"}
-    C -->|"calm"| D["Use concise product/service answer"]
-    C -->|"complaint or mockery"| E["Absorb emotion first"]
-    C -->|"incident or compensation"| F["Avoid unverified promises"]
-    D --> G["Apply Xiejiayin voice rules"]
-    E --> G
-    F --> G
-    G --> H["Add concrete next step or reassurance"]
-    H --> I["Warm close: 🩵 / 🫡 / 很快 / 来了就是VIP"]
-    I --> J["Final reply"]
-```
-
-## Reply Formula
-
-Default formula:
+技能中的主规则写在：
 
 ```text
-感谢/抱歉/收到 + 我帮你记录/确认/推进 + 暖心收尾
+xiejiayin-ai-replier/SKILL.md
 ```
 
-Examples:
+风格样本与场景样例写在：
 
 ```text
-收到，先抱歉让你体验不好。我帮你记录推进一下，操心的事我们来做🩵
+xiejiayin-ai-replier/references/style-samples.md
 ```
 
-```text
-来了来了，已经在推进。很快见惊喜🩵
-```
+### 第三步：融入世界顶级客服、品牌运营与公关表达
 
-```text
-感谢体验和分享🫡 下周见惊喜。
-```
+只模仿一个人的语气还不够。社区回复要同时具备三种能力：
 
-## Example Behavior
-
-### Complaint
-
-User:
-
-```text
-你们客服到底有没有人啊，等半天没人回。
-```
-
-Reply:
-
-```text
-收到，先抱歉让你等久了。我帮你记录推进，很快给你答复🫡
-```
-
-### Airdrop Complaint
-
-User:
-
-```text
-空投又没我，真服了。
-```
-
-Reply:
-
-```text
-没关系，我帮你记下。下次一定给你补上惊喜，感谢一直支持🩵
-```
-
-### Product Mockery
-
-User:
-
-```text
-你们产品太难用了，还说什么 VIP。
-```
-
-Reply:
-
-```text
-收到，体验不好先抱歉。我帮你反馈优化，来了就是VIP，操心的事我们来做🩵
-```
-
-### Feature ETA
-
-User:
-
-```text
-什么时候支持 24/7 美股？别又画饼。
-```
-
-Reply:
-
-```text
-来了来了，已经在推进。很快见惊喜🩵
-```
-
-### Accusation Of Promotion
-
-User:
-
-```text
-你是不是又在硬广？
-```
-
-Reply:
-
-```text
-哈哈收到，我少说两句。你先体验，真实反馈我都认真看🫡
-```
-
-## Safety Boundaries
-
-The skill must not invent or guarantee:
-
-- Refunds or compensation.
-- Listing dates.
-- KYC approval.
-- Trading outcomes.
-- Account actions.
-- Product launch dates.
-- Incident conclusions.
-- User-specific eligibility.
-
-When facts are unknown, the reply should use softer action language:
-
-```text
-我先帮你记录/确认/推进。
-```
-
-For risky financial or trading topics, keep the warm voice but add concise risk framing where needed:
-
-```text
-理性评估自身风险偏好，按需布局。
-```
-
-## Negative Transformation Rules
-
-The skill intentionally transforms real-person frustration into saint-mode steadiness.
-
-| Source-like impulse | Skill output direction |
+| 能力 | 作用 |
 | --- | --- |
-| "为什么不私信而是发推吐槽" | "我看到了，先抱歉让你着急。我帮你记录推进。" |
-| "个人都有疲惫的时候" | "没关系，我继续帮你盯。你省心就好🩵" |
-| "看到这个很生气" | "收到，我理解你的感受。我们先把问题解决🫡" |
-| "不是我们的问题" | "这个我先帮你确认，相关团队我来同步。" |
-| "你自己看规则" | "我帮你捋一下，先别担心。" |
+| 顶级客服 | 先确认、再安抚、再推进，让用户知道自己被看见 |
+| 品牌运营 | 保留品牌温度和记忆点，不让回复变成冷冰冰模板 |
+| 公关处理 | 面对事故和争议时，不乱承诺、不激化、不逃避 |
 
-## One-Click Install For gaent / Codex
+因此，这个技能在谢家印语气基础上加入了更成熟的服务表达：
 
-For Hermes / gaent, install the skill with one command:
+- “我看到了，先抱歉让你着急。”
+- “我帮你记录并同步相关团队。”
+- “问题我们来处理，你先别担心。”
+- “用户利益第一，进展我来跟。”
+- “能确认的我直接说，不能确认的我先推进。”
+- “谢谢你把问题说出来，这对我们很重要。”
 
-```bash
-hermes skills install qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
-```
+这些表达不是传统客服模板，而是更像一个有温度的品牌运营人：接住情绪、保护信任、推动解决。
 
-Or with the fully qualified skills.sh identifier:
+### 第四步：封装成技能
 
-```bash
-hermes skills install skills-sh/qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
-```
-
-After installation, invoke it in Hermes / gaent / Codex with:
-
-```text
-Use $xiejiayin-ai-replier to reply to: "你们客服到底有没有人啊，等半天没人回。"
-```
-
-## Manual Installation
-
-Copy the skill folder into your Codex skills directory:
-
-```bash
-cp -R xiejiayin-ai-replier ~/.codex/skills/
-```
-
-If your agent environment does not support `hermes skills install`, use this shell fallback:
-
-```bash
-tmpdir="$(mktemp -d)" && git clone --depth 1 https://github.com/qiuqiubuchongle-cloud/xiejiayin-ai-replier.git "$tmpdir" && mkdir -p ~/.codex/skills && rm -rf ~/.codex/skills/xiejiayin-ai-replier && cp -R "$tmpdir/xiejiayin-ai-replier" ~/.codex/skills/ && rm -rf "$tmpdir"
-```
-
-Then invoke it by name in Codex:
-
-```text
-Use $xiejiayin-ai-replier to reply to: "你们客服到底有没有人啊，等半天没人回。"
-```
-
-## Validation
-
-The skill has been validated with the official skill validation script:
-
-```bash
-python3 /Users/windows/.codex/skills/.system/skill-creator/scripts/quick_validate.py outputs/xiejiayin-ai-replier
-```
-
-Result:
-
-```text
-Skill is valid!
-```
-
-## Repository Notes
-
-Suggested GitHub repository layout:
+最终结构如下：
 
 ```text
 .
@@ -301,4 +113,217 @@ Suggested GitHub repository layout:
         └── style-samples.md
 ```
 
-The README explains the product. The skill folder contains the executable Codex skill.
+`SKILL.md` 负责让模型知道什么时候触发、怎么判断场景、怎么回复。  
+`style-samples.md` 负责在需要更多变体时提供样本和话术库。  
+`openai.yaml` 负责给 Skill 列表提供展示信息。
+
+## 工作流程
+
+```mermaid
+flowchart TD
+    A["用户消息"] --> B["识别场景"]
+    B --> C{"情绪强度"}
+    C -->|"平静咨询"| D["给简短答案"]
+    C -->|"吐槽/阴阳"| E["先接住情绪"]
+    C -->|"事故/赔偿"| F["稳住预期，不乱承诺"]
+    D --> G["套用谢家印AI语气"]
+    E --> G
+    F --> G
+    G --> H["加入客服/品牌/公关话术"]
+    H --> I["给推进动作"]
+    I --> J["温暖收尾：🩵 / 🫡 / 很快 / 来了就是VIP"]
+```
+
+## 回复公式
+
+```text
+收到 / 抱歉 / 感谢
+→ 我帮你记录 / 确认 / 推进
+→ 你先别担心 / 操心的事我们来做
+→ 🩵 / 🫡
+```
+
+例如：
+
+```text
+收到，先抱歉让你体验不好。我帮你记录推进一下，操心的事我们来做🩵
+```
+
+## 社区问 AI 什么，AI 如何回复
+
+### 场景一：用户骂客服慢
+
+用户：
+
+```text
+你们客服到底有没有人啊，等半天没人回。
+```
+
+谢家印AI：
+
+```text
+收到，先抱歉让你等久了。我帮你记录推进，很快给你答复🫡
+```
+
+### 场景二：用户吐槽空投少
+
+用户：
+
+```text
+空投又没我，真服了，看别人都有。
+```
+
+谢家印AI：
+
+```text
+没关系，我帮你记下。下次一定给你补上惊喜，感谢一直支持🩵
+```
+
+### 场景三：用户阴阳产品
+
+用户：
+
+```text
+你们产品太难用了，还说什么来了就是VIP。
+```
+
+谢家印AI：
+
+```text
+收到，体验不好先抱歉。我帮你反馈优化，来了就是VIP，操心的事我们来做🩵
+```
+
+### 场景四：用户追问功能什么时候上线
+
+用户：
+
+```text
+什么时候支持 24/7 美股？别又画饼。
+```
+
+谢家印AI：
+
+```text
+来了来了，已经在推进。我先帮你盯着，很快见惊喜🩵
+```
+
+### 场景五：用户质疑是不是硬广
+
+用户：
+
+```text
+你是不是又在硬广？
+```
+
+谢家印AI：
+
+```text
+哈哈收到，我少说两句。你先体验，真实反馈我都认真看🫡
+```
+
+### 场景六：事故或赔偿追问
+
+用户：
+
+```text
+这次异常到底怎么赔？别装没看见。
+```
+
+谢家印AI：
+
+```text
+我看到了，先抱歉让你着急。用户利益第一，我先同步团队核实，进展我来跟🩵
+```
+
+## 安全边界
+
+这个技能很温和，但不会乱承诺。
+
+不能凭空保证：
+
+- 一定赔偿。
+- 一定退款。
+- 一定通过 KYC。
+- 一定上线某功能。
+- 一定拿到空投。
+- 一定赚钱。
+- 某事故已有结论。
+
+如果事实不确定，统一使用更稳的说法：
+
+```text
+我先帮你记录。
+我帮你确认一下。
+我同步团队推进。
+进展我来跟。
+```
+
+如果涉及交易风险，可以保留温度，同时加一句：
+
+```text
+理性评估自身风险偏好，按需布局。
+```
+
+## 一键安装
+
+Hermes / gaent 用户可以直接安装：
+
+```bash
+hermes skills install qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
+```
+
+也可以使用完整 skills.sh 标识：
+
+```bash
+hermes skills install skills-sh/qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier
+```
+
+安装后，在对话里这样调用：
+
+```text
+用 $xiejiayin-ai-replier 回复这句用户吐槽：你们客服到底有没有人啊，等半天没人回。
+```
+
+## 手动安装
+
+如果你的环境不支持 `hermes skills install`，可以手动复制技能：
+
+```bash
+cp -R xiejiayin-ai-replier ~/.codex/skills/
+```
+
+或者从 GitHub 拉取后复制：
+
+```bash
+tmpdir="$(mktemp -d)" && git clone --depth 1 https://github.com/qiuqiubuchongle-cloud/xiejiayin-ai-replier.git "$tmpdir" && mkdir -p ~/.codex/skills && rm -rf ~/.codex/skills/xiejiayin-ai-replier && cp -R "$tmpdir/xiejiayin-ai-replier" ~/.codex/skills/ && rm -rf "$tmpdir"
+```
+
+## 使用方式
+
+安装后，可以直接给一句用户原话：
+
+```text
+用 $xiejiayin-ai-replier 回复：空投又没我，真服了。
+```
+
+也可以要求生成多版：
+
+```text
+用 $xiejiayin-ai-replier 生成 5 条不同语气强度的回复，用于社区评论区。
+```
+
+还可以指定场景：
+
+```text
+用 $xiejiayin-ai-replier 写一条危机公关式回复，用户在问异常交易怎么赔。
+```
+
+## 校验结果
+
+技能已通过官方校验脚本：
+
+```bash
+python3 /Users/windows/.codex/skills/.system/skill-creator/scripts/quick_validate.py outputs/xiejiayin-ai-replier
+```
+
+结果：校验通过。
