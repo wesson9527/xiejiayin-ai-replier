@@ -95,6 +95,79 @@ h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; }
   line-height: 1.8;
 }
 .note strong { color: #9ca3af; }
+.review-summary {
+  background: #111620;
+  border: 1px solid #1e2430;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.review-title {
+  color: #f3f4f6;
+  font-size: 1rem;
+  font-weight: 800;
+}
+.review-note {
+  color: #6b7280;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+.review-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.review-stat {
+  background: #0f131b;
+  border: 1px solid #1f2937;
+  border-radius: 999px;
+  color: #cbd5e1;
+  font-size: 0.74rem;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.review-table {
+  display: grid;
+  gap: 8px;
+}
+.review-row {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 0.8fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #0f131b;
+  border: 1px solid #1f2937;
+  font-size: 0.78rem;
+}
+.review-row.header {
+  background: transparent;
+  border: 0;
+  color: #64748b;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.review-match { color: #f3f4f6; font-weight: 700; }
+.review-direction,
+.review-result { color: #94a3b8; }
+.review-badge {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+.review-badge.hit { background: #16a34a20; color: #22c55e; border: 1px solid #16a34a33; }
+.review-badge.skip { background: #374151; color: #9ca3af; border: 1px solid #4b5563; }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -108,6 +181,10 @@ h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; }
   body { max-width: 680px; padding: 28px 14px 72px; }
   .card-grid { grid-template-columns: 1fr; }
   .recommendation-card { padding: 18px; }
+  .review-top { display: block; }
+  .review-stats { justify-content: flex-start; margin-top: 12px; }
+  .review-row { grid-template-columns: 1fr; gap: 4px; }
+  .review-row.header { display: none; }
 }
 </style>
 </head>
@@ -422,7 +499,59 @@ h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; }
 </div>
   <div class="verdict">📌 暂无明确信号</div>
   <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>比赛临近（2026-06-17），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
-</div></div><div class="section-header">✅ 近期赛果回顾</div><div class="card-grid">
+</div></div><div class="section-header">📊 近期比赛回顾</div>
+<div class="review-summary">
+  <div class="review-top">
+    <div>
+      <div class="review-title">聪明钱方向复盘</div>
+      <div class="review-note">只复盘当时有明确买入方向的信号；观望/不买不计入命中率。</div>
+    </div>
+    <div class="review-stats">
+      <span class="review-stat">明确方向 1 场</span>
+      <span class="review-stat">命中 1 场</span>
+      <span class="review-stat">观望未触发 4 场</span>
+    </div>
+  </div>
+  <div class="review-table">
+    <div class="review-row header">
+      <div>比赛</div>
+      <div>当时判断</div>
+      <div>最终赛果</div>
+      <div>复盘</div>
+    </div>
+    <div class="review-row">
+      <div class="review-match">瑞典 vs 突尼斯</div>
+      <div class="review-direction">聪明钱方向：瑞典胜</div>
+      <div class="review-result">瑞典 3-0</div>
+      <div><span class="review-badge hit">方向命中</span></div>
+    </div>
+    <div class="review-row">
+      <div class="review-match">科特迪瓦 vs 厄瓜多尔</div>
+      <div class="review-direction">无明确盘口，观望</div>
+      <div class="review-result">科特迪瓦 4-2</div>
+      <div><span class="review-badge skip">未触发</span></div>
+    </div>
+    <div class="review-row">
+      <div class="review-match">美国 vs 巴拉圭</div>
+      <div class="review-direction">无明确盘口，观望</div>
+      <div class="review-result">美国 2-0</div>
+      <div><span class="review-badge skip">未触发</span></div>
+    </div>
+    <div class="review-row">
+      <div class="review-match">韩国 vs 捷克</div>
+      <div class="review-direction">无明确盘口，观望</div>
+      <div class="review-result">韩国 2-1</div>
+      <div><span class="review-badge skip">未触发</span></div>
+    </div>
+    <div class="review-row">
+      <div class="review-match">加拿大 vs 波黑</div>
+      <div class="review-direction">无明确盘口，观望</div>
+      <div class="review-result">加拿大 2-1</div>
+      <div><span class="review-badge skip">未触发</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-header">✅ 近期赛果回顾</div><div class="card-grid">
 <div class="recommendation-card closed">
   <div class="card-top">
     <div>
