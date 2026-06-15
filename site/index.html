@@ -1,253 +1,557 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web3 AI 回复工具</title>
-    <meta
-      name="description"
-      content="Web3 AI 回复工具，把社区吐槽、产品问题和活动互动转译成有温度、有推进感的中文回复。"
-    />
-    <link rel="stylesheet" href="./styles.css?v=20260606-5" />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Web3 AI 回复工具首页">
-        <span class="brand-symbol">W3</span>
-        <span>Web3 AI 回复工具</span>
-      </a>
-      <nav aria-label="主导航">
-        <a href="#exhibition">能力</a>
-        <a href="#instrument">生成器</a>
-        <a href="#install">安装</a>
-      </nav>
-    </header>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界杯聪明钱盘口信号</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+  background: #0b0e14;
+  color: #d1d5db;
+  line-height: 1.7;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 18px 80px;
+}
+.badge {
+  display: inline-block;
+  background: #1e2430;
+  color: #6b7280;
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; }
+.update-time { font-size: 0.75rem; color: #4b5563; margin-bottom: 32px; }
 
-    <main id="top">
-      <section class="hero-section">
-        <div class="gallery-label">
-          <span>WEB3 REPLY PLAYGROUND</span>
-          <span>JIAYIN + KAJIE</span>
-        </div>
-        <div class="hero-layout">
-          <div class="hero-copy">
-            <p class="kicker">给 Web3 社区运营的一键人格回复工具</p>
-            <h1>
-              <span>家印+卡姐双重奏</span>
-              <span>回应你想要的一切</span>
-            </h1>
-            <p class="hero-text">
-              把一句难接的话，变成一条还能继续聊下去的回复。先选人格，再丢问题，生成之后再决定要不要做成分享卡。
-            </p>
-          </div>
-          <div class="hero-side-note">
-            <span>HOW IT WORKS</span>
-            <p>选一个人来回。家印负责接住情绪，卡姐负责耐心推进。</p>
-          </div>
-        </div>
-      </section>
+.section-header {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 32px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #1e2430;
+}
 
-      <section class="instrument-section home-instrument" id="instrument">
-        <div class="persona-panel">
-          <div class="persona-panel-head">
-            <div>
-              <div class="section-index">人格切换 / PERSONA</div>
-              <h2>人格切换</h2>
-            </div>
-            <p>一个适合把事扛起来，一个适合把人哄回来。真正处理问题的还是你，AI 只是先把语气放软。</p>
-          </div>
-          <div class="persona-grid" aria-label="人格模块">
-            <button class="persona-card is-active" type="button" data-persona="xiejiayin" aria-pressed="true">
-              <span>01 / STEADY</span>
-              <strong>稳稳接住</strong>
-              <em>谢家印模式</em>
-              <p>适合投诉、催更、危机、公关。少解释，先负责。</p>
-            </button>
-            <button class="persona-card" type="button" data-persona="kajiq" aria-pressed="false">
-              <span>02 / SWEET</span>
-              <strong>闺蜜式种草</strong>
-              <em>卡姐 kajiQ 模式</em>
-              <p>适合钱包、U 卡、福利、种草。先哄好，再推进。</p>
-            </button>
-          </div>
-        </div>
-        <div class="instrument-grid">
-          <form class="composer-panel" id="replyForm">
-            <input id="personaInput" type="hidden" value="xiejiayin" />
-            <label for="userMessage">用户原话</label>
-            <textarea
-              id="userMessage"
-              rows="7"
-              placeholder="例如：为什么 Bitget 钱包这么难用？客服也没人回。"
-            ></textarea>
+.recommendation-card {
+  background: #111620;
+  border: 1px solid #1e2430;
+  border-radius: 14px;
+  padding: 22px;
+  min-width: 0;
+  transition: border-color 0.2s;
+}
+.recommendation-card.strong { border-color: #f59e0b33; background: linear-gradient(135deg, #111620 0%, #1a1610 100%); }
+.recommendation-card.moderate { border-color: #1e2430; }
+.recommendation-card.weak { opacity: 0.7; }
+.recommendation-card.closed { opacity: 0.4; }
 
-            <div class="control-row">
-              <div>
-                <label for="sceneSelect">场景</label>
-                <select id="sceneSelect">
-                  <option value="complaint">用户吐槽</option>
-                  <option value="support">客服慢 / 服务失败</option>
-                  <option value="feature">功能催更</option>
-                  <option value="crisis">事故 / 赔偿 / 公关</option>
-                  <option value="promo">产品种草</option>
-                  <option value="tweet">写一条推文</option>
-                </select>
-              </div>
-              <div>
-                <label for="toneSelect">语气</label>
-                <select id="toneSelect">
-                  <option value="xie">人格原味</option>
-                  <option value="service">暖男客服</option>
-                  <option value="pr">品牌公关</option>
-                  <option value="web3">Web3 社交</option>
-                  <option value="redbook">小红书种草</option>
-                </select>
-              </div>
-            </div>
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.match-title { font-size: 1.1rem; font-weight: 700; color: #f3f4f6; }
+.match-title a { color: #f3f4f6; text-decoration: none; }
+.match-title a:hover { color: #f59e0b; }
+.match-date { font-size: 0.8rem; color: #4b5563; }
 
-            <div class="switch-row">
-              <label>
-                <input id="emojiToggle" type="checkbox" checked />
-                <span>带 🩵 / 🫡</span>
-              </label>
-              <label>
-                <input id="shortToggle" type="checkbox" checked />
-                <span>短句优先</span>
-              </label>
-            </div>
+.verdict {
+  font-size: 0.95rem;
+  margin: 10px 0 8px;
+  color: #e5e7eb;
+}
 
-            <button class="primary-button" type="submit">生成回复</button>
-          </form>
+.reasons {
+  font-size: 0.82rem;
+  color: #6b7280;
+  line-height: 1.8;
+}
+.reasons li { margin-left: 16px; margin-bottom: 4px; }
+.reasons li::marker { color: #374151; }
 
-          <section class="result-panel" aria-live="polite">
-            <div class="result-heading">
-              <span>OUTPUT</span>
-              <h2>点击回复卡片，复制或分享</h2>
-            </div>
-            <div class="result-list" id="resultList"></div>
-          </section>
-        </div>
-      </section>
+.confidence-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.confidence-tag.high { background: #f59e0b20; color: #f59e0b; }
+.confidence-tag.medium { background: #3b82f620; color: #3b82f6; }
+.confidence-tag.low { background: #374151; color: #6b7280; }
 
-      <section class="curator-note" id="exhibition">
-        <div class="section-index">写给运营的人 / NOTE</div>
-        <p>
-          真正有温度的，还是乐于回应的人。这个工具只是帮你在最忙、最累、最容易语气变重的时候，先把句子放软，把动作说清，把用户留在对话里。
-        </p>
-      </section>
+.footer { text-align: center; color: #374151; font-size: 0.7rem; margin-top: 48px; }
+.footer a { color: #4b5563; }
 
-      <section class="exhibit-grid" aria-label="工具原则">
-        <article class="exhibit-card">
-          <span>01 / HOLD FIRE</span>
-          <h2>稳住情绪</h2>
-          <p>用户情绪上来时，先把火接住，不急着证明自己对。</p>
-        </article>
-        <article class="exhibit-card">
-          <span>02 / SOFT WORDS</span>
-          <h2>亲切关怀</h2>
-          <p>同一句“我去处理”，可以变成“我帮你记录推进，先不让你白等”。</p>
-        </article>
-        <article class="exhibit-card">
-          <span>03 / SHAREABLE</span>
-          <h2>命中问题</h2>
-          <p>好回复不只解决问题，还能变成一张卡，让别人看见这个社区的温度。</p>
-        </article>
-      </section>
+.note {
+  background: #111620;
+  border: 1px solid #1e2430;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 32px;
+  font-size: 0.78rem;
+  color: #6b7280;
+  line-height: 1.8;
+}
+.note strong { color: #9ca3af; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.card-grid.single {
+  grid-template-columns: 1fr;
+}
+@media (max-width: 820px) {
+  body { max-width: 680px; padding: 28px 14px 72px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .recommendation-card { padding: 18px; }
+}
+</style>
+</head>
+<body>
 
-      <section class="phrase-section" aria-label="语气素材库">
-        <div class="section-index">语气素材库 / VOICE LIBRARY</div>
-        <div class="phrase-layout">
-          <div>
-            <h2>金句库</h2>
-            <p>把社区里真正有记忆点的表达沉淀下来。需要稳的时候稳，需要哄的时候哄，需要推进的时候把动作说清楚。</p>
-          </div>
-          <div class="phrase-cloud">
-            <button type="button" data-fill-phrase="来了就是VIP">来了就是VIP</button>
-            <button type="button" data-fill-phrase="宝子先别急">宝子先别急</button>
-            <button type="button" data-fill-phrase="我帮你记录推进">我帮你记录推进</button>
-            <button type="button" data-fill-phrase="真实体验最重要">真实体验最重要</button>
-            <button type="button" data-fill-phrase="先不让你白等">先不让你白等</button>
-          </div>
-        </div>
-      </section>
+<div class="badge">2026 世界杯 · Polymarket 聪明钱</div>
+<h1>每日盘口信号</h1>
+<p class="update-time">06/15 · 更新于 2026-06-15 16:21 · 只读分析，不自动交易</p>
+<div class="note" style="margin-top:0;margin-bottom:22px">
+  <strong>使用方式：</strong>优先看“推荐盘口”和“价格上限”。价格超过上限就不追；没有聪明钱集群就只观察。
+</div>
 
-      <section class="flow-section" aria-label="生成过程图">
-        <div class="section-index">生成过程 / FLOW</div>
-        <div class="flow-strip">
-          <div><span>01</span><strong>用户情绪</strong><p>吐槽、催更、阴阳、求助</p></div>
-          <div><span>02</span><strong>人格选择</strong><p>家印稳住，卡姐哄好</p></div>
-          <div><span>03</span><strong>话术库</strong><p>品牌公关 + Web3 社交语感</p></div>
-          <div><span>04</span><strong>回复卡片</strong><p>可复制，也可生成图片</p></div>
-          <div><span>05</span><strong>分享到 X</strong><p>让好回复自己传播</p></div>
-        </div>
-      </section>
-
-      <section class="install-section" id="install">
-        <div class="section-index">安装 / INSTALL</div>
-        <h2>把两个 Skill 放进你的 Agent</h2>
-        <pre><code>npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/xiejiayin-ai-replier --yes --global
-npx skills add qiuqiubuchongle-cloud/xiejiayin-ai-replier/kajiq-ai-replier --yes --global</code></pre>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div>
-        <span>创作人：</span>
-        <a href="https://x.com/qiuqiu232" target="_blank" rel="noreferrer">球球</a>
-      </div>
-      <p>免费试用中。回复由 AI 生成，仅作社区运营文案参考。真正有温度的，始终是愿意认真回应的人。</p>
-    </footer>
-
-    <div class="reply-action-modal" id="replyActionModal" hidden>
-      <div class="reply-action-backdrop" data-close-action></div>
-      <section class="reply-action-panel" role="dialog" aria-modal="true" aria-labelledby="replyActionTitle">
-        <div>
-          <span class="section-index">这条回复 / REPLY</span>
-          <h2 id="replyActionTitle">要怎么用它？</h2>
-          <p id="replyActionText"></p>
-        </div>
-        <div class="share-action-row">
-          <button class="primary-button" type="button" id="actionCopyReply">复制回复</button>
-          <button class="secondary-button" type="button" id="actionOpenShare">生成分享卡</button>
-          <button class="secondary-button" type="button" data-close-action>先看看</button>
-        </div>
-      </section>
+<div class="section-header">今日结论</div>
+<div class="note" style="margin-top:0;margin-bottom:20px">
+  当前没有达到买入阈值的世界杯盘口。可以看下面的候选比赛，但必须等聪明钱出现同向流入后再动。
+</div><div class="section-header">📋 等待信号 / 其他比赛</div><div class="card-grid">
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/search?query=Netherlands+Japan+World+Cup" target="_blank">荷兰 vs 日本</a></div>
+      <div class="match-date">06/17 周三</div>
     </div>
-
-    <div class="share-modal" id="shareModal" hidden>
-      <div class="share-modal-backdrop" data-close-share></div>
-      <section class="share-modal-panel" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
-        <div class="share-modal-head">
-          <div>
-            <span class="section-index">分享卡 / SHARE CARD</span>
-            <h2 id="shareModalTitle">把这条回复变成一张图</h2>
-          </div>
-          <button class="icon-button" type="button" data-close-share aria-label="关闭分享卡">×</button>
-        </div>
-        <div class="share-export-wrap">
-          <div class="share-card export-card" id="exportShareCard">
-            <div class="share-card-topline">
-              <span id="exportPersona">谢家印模式</span>
-              <span>warmreply.xyz</span>
-            </div>
-            <div class="share-card-tag" id="exportTag">用户吐槽 / 人格原味</div>
-            <p class="share-card-question" id="exportQuestion">为什么钱包这么难用？客服也没人回。</p>
-            <p class="share-card-reply" id="exportReply">收到，先抱歉让你体验不好。我帮你记录推进🩵</p>
-            <div class="share-card-footer">
-              <span>真正有温度的还是人</span>
-              <span>WEB3 AI 回复工具</span>
-            </div>
-          </div>
-        </div>
-        <div class="share-action-row">
-          <button class="primary-button" type="button" id="downloadShareCard">下载 PNG</button>
-          <button class="secondary-button" type="button" id="copyShareCard">复制图片</button>
-          <a class="secondary-button" id="tweetShareCard" target="_blank" rel="noreferrer">发到 X</a>
-        </div>
-      </section>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">等盘口，不买</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：已有聪明钱痕迹，但没有可验证价格；必须等胜平负/让球/大小球盘口出现</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>链上 11 个高胜率地址已进场</li><li>这些地址在此比赛上已实现 $3,732,834 盈利</li><li>比赛临近（2026-06-17），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-esp-cvi-2026-06-15" target="_blank">西班牙 vs 维德角</a></div>
+      <div class="match-date">06/15 周一</div>
     </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">西班牙</span> <span style="color:#f59e0b">92%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">6%</span>  ·  <span style="color:#f3f4f6;font-weight:600">维德角</span> <span style="color:#f59e0b">2%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：西班牙 -2.5  |  大小球：大于 3.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">让球盘：买 西班牙 -2.5</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：让球盘（Polymarket 里选 Spreads）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：西班牙 -2.5</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是 西班牙 必须赢 3 球或以上才算赢；只赢 2 球或更少就输。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 58% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果这个选项价格涨到 60% 以上，或聪明钱没有继续流入，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-bel-egy-2026-06-15" target="_blank">比利时 vs 埃及</a></div>
+      <div class="match-date">06/15 周一</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">比利时</span> <span style="color:#f59e0b">62%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">24%</span>  ·  <span style="color:#f3f4f6;font-weight:600">埃及</span> <span style="color:#f59e0b">16%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：比利时 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 比利时 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：比利时 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是只买 比利时 常规比赛胜出，不是让球盘。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 67% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果价格高于上限，或临场出现反向聪明钱，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-ksa-ury-2026-06-15" target="_blank">沙特阿拉伯 vs 乌拉圭</a></div>
+      <div class="match-date">06/15 周一</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">沙特阿拉伯</span> <span style="color:#f59e0b">12%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">23%</span>  ·  <span style="color:#f3f4f6;font-weight:600">乌拉圭</span> <span style="color:#f59e0b">67%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：乌拉圭 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 乌拉圭 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：乌拉圭 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是只买 乌拉圭 常规比赛胜出，不是让球盘。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 72% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果价格高于上限，或临场出现反向聪明钱，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-irn-nzl-2026-06-15" target="_blank">伊朗 vs 新西兰</a></div>
+      <div class="match-date">06/15 周一</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">伊朗</span> <span style="color:#f59e0b">51%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">28%</span>  ·  <span style="color:#f3f4f6;font-weight:600">新西兰</span> <span style="color:#f59e0b">22%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：伊朗 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">大小球：买 大于 2.5</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：大小球（Polymarket 里选 Totals）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：大于 2.5</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是买两队最终总进球数相对盘口线的大/小。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 58% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：没有明确同向资金时不碰大小球</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-fra-sen-2026-06-16" target="_blank">法国 vs 塞内加尔</a></div>
+      <div class="match-date">06/16 周二</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">法国</span> <span style="color:#f59e0b">67%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">22%</span>  ·  <span style="color:#f3f4f6;font-weight:600">塞内加尔</span> <span style="color:#f59e0b">13%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：法国 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 法国 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：法国 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是只买 法国 常规比赛胜出，不是让球盘。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 72% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果价格高于上限，或临场出现反向聪明钱，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>比赛临近（2026-06-16），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-irq-nor-2026-06-16" target="_blank">伊拉克 vs 挪威</a></div>
+      <div class="match-date">06/16 周二</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">伊拉克</span> <span style="color:#f59e0b">6%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">13%</span>  ·  <span style="color:#f3f4f6;font-weight:600">挪威</span> <span style="color:#f59e0b">83%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：挪威 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">大小球：买 大于 2.5</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：大小球（Polymarket 里选 Totals）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：大于 2.5</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是买两队最终总进球数相对盘口线的大/小。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 58% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：没有明确同向资金时不碰大小球</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>比赛临近（2026-06-16），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-arg-alg-2026-06-16" target="_blank">阿根廷 vs 阿尔及利亚</a></div>
+      <div class="match-date">06/16 周二</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">阿根廷</span> <span style="color:#f59e0b">71%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">21%</span>  ·  <span style="color:#f3f4f6;font-weight:600">阿尔及利亚</span> <span style="color:#f59e0b">10%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：阿根廷 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 阿根廷 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：阿根廷 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是只买 阿根廷 常规比赛胜出，不是让球盘。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 75% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果价格高于上限，或临场出现反向聪明钱，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>比赛临近（2026-06-16），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-aut-jor-2026-06-17" target="_blank">奥地利 vs 约旦</a></div>
+      <div class="match-date">06/17 周三</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">奥地利</span> <span style="color:#f59e0b">73%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">18%</span>  ·  <span style="color:#f3f4f6;font-weight:600">约旦</span> <span style="color:#f59e0b">11%</span></div><div style="font-size:0.75rem;color:#4b5563">让球：奥地利 -1.5  |  大小球：大于 2.5</div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 奥地利 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：奥地利 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">意思是只买 奥地利 常规比赛胜出，不是让球盘。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 75% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：如果价格高于上限，或临场出现反向聪明钱，放弃</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>比赛临近（2026-06-17），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/search?query=Brazil+Morocco+World+Cup" target="_blank">巴西 vs 摩洛哥</a></div>
+      <div class="match-date">06/17 周三</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>比赛临近（2026-06-17），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/search?query=Australia+Turkiye+World+Cup" target="_blank">澳大利亚 vs 土耳其</a></div>
+      <div class="match-date">06/18 周四</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>比赛临近（2026-06-18），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/search?query=Haiti+Scotland+World+Cup" target="_blank">海地 vs 苏格兰</a></div>
+      <div class="match-date">06/18 周四</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>比赛临近（2026-06-18），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div>
+<div class="recommendation-card weak">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/search?query=Germany+Curacao+World+Cup" target="_blank">德国 vs 库拉索</a></div>
+      <div class="match-date">06/17 周三</div>
+    </div>
+    <span class="confidence-tag low">低确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">📌 暂无明确信号</div>
+  <ul class='reasons'><li>缺少胜平负/让球/大小球赔率，只能观察，不能给买入建议</li><li>比赛临近（2026-06-17），聪明钱通常在赛前 2-4 小时集中进场，建议盯盘</li></ul>
+</div></div><div class="section-header">✅ 近期赛果回顾</div><div class="card-grid">
+<div class="recommendation-card closed">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-swe-tun-2026-06-14" target="_blank">瑞典 vs 突尼斯</a></div>
+      <div class="match-date">06/14 周日</div>
+    </div>
+    <span class="confidence-tag low">—确定性</span>
+  </div>
+  <div style="font-size:0.85rem;margin:8px 0;color:#6b7280">胜平负：<span style="color:#f3f4f6;font-weight:600">瑞典</span> <span style="color:#f59e0b">94%</span>  ·  <span style="color:#f3f4f6;font-weight:600">平局</span> <span style="color:#f59e0b">6%</span>  ·  <span style="color:#f3f4f6;font-weight:600">突尼斯</span> <span style="color:#f59e0b">2%</span></div>
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">胜平负：买 瑞典 胜</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：胜平负（Polymarket 里选 Moneyline）</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：瑞典 胜</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">缺少让球/大小球价格，只能按胜平负观察。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：≤ 60% · 建议仓位：观察</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：等待确认</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少让球/大小球数据，先观望</div>
+</div>
+  <div class="verdict">已结束</div>
+  <ul class='reasons'><li>赛果：瑞典 3-0</li><li>链上 7 个高胜率地址已进场</li><li>这些地址在此比赛上已实现 $3,866,160 盈利</li></ul>
+</div>
+<div class="recommendation-card closed">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-civ-ecu-2026-06-14" target="_blank">科特迪瓦 vs 厄瓜多尔</a></div>
+      <div class="match-date">06/14 周日</div>
+    </div>
+    <span class="confidence-tag low">—确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">等盘口，不买</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：已有聪明钱痕迹，但没有可验证价格；必须等胜平负/让球/大小球盘口出现</div>
+</div>
+  <div class="verdict">已结束</div>
+  <ul class='reasons'><li>赛果：科特迪瓦 4-2</li><li>链上 4 个高胜率地址已进场</li><li>这些地址在此比赛上已实现 $1,919,671 盈利</li></ul>
+</div>
+<div class="recommendation-card closed">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-usa-par-2026-06-13" target="_blank">美国 vs 巴拉圭</a></div>
+      <div class="match-date">06/13 周六</div>
+    </div>
+    <span class="confidence-tag low">—确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">已结束</div>
+  <ul class='reasons'><li>赛果：美国 2-0</li></ul>
+</div>
+<div class="recommendation-card closed">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-kor-cze-2026-06-13" target="_blank">韩国 vs 捷克</a></div>
+      <div class="match-date">06/13 周六</div>
+    </div>
+    <span class="confidence-tag low">—确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">已结束</div>
+  <ul class='reasons'><li>赛果：韩国 2-1</li></ul>
+</div>
+<div class="recommendation-card closed">
+  <div class="card-top">
+    <div>
+      <div class="match-title"><a href="https://polymarket.com/sports/world-cup/games/week/1/fifwc-can-bih-2026-06-13" target="_blank">加拿大 vs 波黑</a></div>
+      <div class="match-date">06/13 周六</div>
+    </div>
+    <span class="confidence-tag low">—确定性</span>
+  </div>
+  
+  
+<div style="margin-top:10px;padding:12px;border-radius:12px;background:#0f131b;border:1px solid #1f2937">
+  <div style="font-size:0.78rem;color:#9ca3af;margin-bottom:6px">推荐盘口</div>
+  <div style="font-size:1rem;color:#f3f4f6;font-weight:700">暂无明确盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:6px">盘口分组：等待 Polymarket 盘口</div>
+  <div style="font-size:0.78rem;color:#94a3b8;margin-top:4px">买入选项：不买</div>
+  <div style="font-size:0.76rem;color:#64748b;margin-top:4px">没有可验证价格时，不把聪明钱痕迹直接当成买点。</div>
+  <div style="font-size:0.8rem;color:#cbd5e1;margin-top:8px">价格上限：— · 建议仓位：观望</div>
+  <div style="font-size:0.8rem;color:#94a3b8;margin-top:4px">执行判断：观望</div>
+  <div style="font-size:0.74rem;color:#64748b;margin-top:6px">放弃条件：缺少赔率数据，等待临场盘口更新</div>
+</div>
+  <div class="verdict">已结束</div>
+  <ul class='reasons'><li>赛果：加拿大 2-1</li></ul>
+</div></div>
+<div style="text-align:center;padding:40px 0;color:#4b5563">
+  <div style="font-size:2rem;margin-bottom:12px">🏟️</div>
+  <p>当前暂无明确信号的比赛</p>
+  <p style="font-size:0.8rem;margin-top:4px">聪明钱通常在赛前 2-4 小时集中进场，晚些时候再来看</p>
+</div>
+<div class="note">
+  <strong>📖 方法论</strong><br>
+  推荐分数来自：聪明钱地址数量、这些地址历史 PnL、近期资金净流入、赔率是否还有性价比。<br>
+  ⭐ 强烈推荐 = 多个信号共振；👍 可以考虑 = 有方向但需要控仓；👀 关注 = 等临场确认；📌 暂无信号 = 不追。<br><br>
+  <strong>⚠️ 风险提示：</strong>本页面只做数据分析，不构成投资或博彩建议。任何盘口都可能输，严格控制仓位。
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="./script.js?v=20260606-5"></script>
-  </body>
+<div class="footer">
+  世界杯盘口信号 · 数据自动更新 · <a href="https://polymarket.com/sports/world-cup">Polymarket</a>
+</div>
+</body>
 </html>
